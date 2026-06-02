@@ -1,0 +1,66 @@
+# ── dotfiles bare-repo guard (public repo) ───────────────────────────────
+# This bare repo tracks $HOME. `status.showUntrackedFiles no` already hides
+# untracked files; this list is a hard block so an accidental `dot add` of a
+# secret is REFUSED by git. Add files explicitly, never `dot add -A`.
+
+# Secrets / keys / auth tokens
+.ssh/
+.gnupg/
+.pki/
+.config/gh/
+.docker/
+.kube/
+.npmrc
+.netrc
+.aws/
+
+# AI tool credentials
+.claude/
+.claude.json
+.codex/
+.gemini/
+.config/Antigravity/
+
+# VPN
+.mullvad/
+.config/Mullvad VPN/
+vpn/
+
+# 🔴 Money / accounts — never publish
+.config/cake_wallet/
+TelegramAccounts/
+
+# App state / sessions / cookies
+.config/discord/
+.config/vesktop/
+.config/spicetify/
+.mozilla/
+.config/obsidian/
+.config/anytype/
+
+# Caches / runtime state
+.cache/
+.config/pulse/
+.config/dconf/
+.config/procps/
+
+# Toolchain caches / build dirs
+go/
+.cargo/
+.rustup/
+.npm/
+.npm-global/
+.bun/
+.gradle/
+.java/
+.config/JetBrains/
+
+# History files
+.bash_history
+.zsh_history
+.viminfo
+.python_history
+.node_repl_history
+
+# fcitx5: keep config, drop learned-input data
+.config/fcitx5/data/

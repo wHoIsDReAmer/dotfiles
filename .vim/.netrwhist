@@ -1,0 +1,7 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =5
+let g:netrw_dirhist_5='/home/developer/.config/hypr/hyprland'
+let g:netrw_dirhist_4='/home/developer/Pictures'
+let g:netrw_dirhist_3='/home/developer/.config/hypr/hyprland'
+let g:netrw_dirhist_2='/home/developer'
+let g:netrw_dirhist_1='/home/developer/.config/hypr/hyprland'

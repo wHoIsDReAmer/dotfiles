@@ -1,0 +1,10 @@
+[Default Applications]
+x-scheme-handler/discord=vesktop.desktop
+x-scheme-handler/anytype=anytype.desktop
+x-scheme-handler/tg=org.telegram.desktop.desktop
+x-scheme-handler/tonsite=org.telegram.desktop.desktop
+x-scheme-handler/claude-cli=claude-code-url-handler.desktop
+
+[Added Associations]
+x-scheme-handler/tg=org.telegram.desktop.desktop;userapp-Telegram Desktop-MQDTM3.desktop;userapp-Telegram Desktop-J4Z8O3.desktop;
+x-scheme-handler/tonsite=org.telegram.desktop.desktop;userapp-Telegram Desktop-116SM3.desktop;userapp-Telegram Desktop-N9V9O3.desktop;

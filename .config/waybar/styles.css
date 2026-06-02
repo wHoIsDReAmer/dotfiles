@@ -1,0 +1,274 @@
+@import "./colors.css";
+@import "./theme.css";
+
+/* ===== Reset ===== */
+* {
+  border: none;
+  font-family: "JetBrainsMono Nerd Font";
+  font-weight: bold;
+  font-size: 14px;
+  min-height: 0;
+  color: @foreground;
+}
+
+/* ===== Bar ===== */
+window#waybar {
+  background: transparent;
+}
+
+window#waybar > box {
+  margin: 5px 6px 0 6px;
+  padding: 0;
+  background: transparent;
+}
+
+/* ===== Glass Islands ===== */
+.modules-left,
+.modules-center,
+.modules-right {
+  background: alpha(@background, 0.55);
+  border: 1px solid alpha(@foreground, 0.1);
+  border-radius: 15px;
+  padding: 3px 4px;
+  margin: 0 3px;
+}
+
+/* ===== Tooltip ===== */
+tooltip {
+  background: @background;
+  border: 1px solid alpha(@foreground, 0.1);
+  border-radius: 12px;
+}
+
+tooltip label {
+  color: @foreground;
+  padding: 4px 8px;
+}
+
+/* ===== General Modules ===== */
+#custom-idle_inhibitor,
+#window,
+#custom-cpuinfo,
+#memory,
+#custom-cpu,
+#clock,
+#network,
+#tray,
+#privacy,
+#language,
+#pulseaudio,
+#custom-backlight,
+#power-profiles-daemon,
+#battery,
+#custom-power {
+  padding: 0 8px;
+  margin: 1px 2px;
+  border-radius: 10px;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ===== LEFT: Idle Inhibitor ===== */
+#custom-idle_inhibitor {
+  color: @rose;
+  padding: 0 6px;
+  margin-left: 2px;
+  font-size: 15px;
+}
+
+#custom-idle_inhibitor:hover {
+  background: alpha(@foreground, 0.07);
+}
+
+/* ===== LEFT: Workspaces ===== */
+#workspaces {
+  padding: 0 2px;
+}
+
+#workspaces button {
+  color: alpha(@foreground, 0.55);
+  border-radius: 10px;
+  padding: 0 6px;
+  margin: 3px 2px;
+  background: transparent;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+#workspaces button.active {
+  color: @foreground;
+  background: alpha(@foreground, 0.12);
+  box-shadow: 0 0 8px alpha(@rose, 0.2);
+  padding: 0 8px;
+}
+
+#workspaces button:hover {
+  color: @foreground;
+  background: alpha(@foreground, 0.07);
+}
+
+/* ===== LEFT: Window Title ===== */
+#window {
+  color: alpha(@foreground, 0.55);
+  font-size: 13px;
+  padding: 0 8px;
+  margin-right: 2px;
+}
+
+/* ===== CENTER: CPU ===== */
+#custom-cpu {
+  color: @teal;
+}
+
+#custom-cpuinfo {
+  color: @teal;
+}
+
+#custom-cpu:hover,
+#custom-cpuinfo:hover {
+  background: alpha(@foreground, 0.07);
+}
+
+/* ===== CENTER: Memory ===== */
+#memory {
+  color: @lavender;
+}
+
+#memory:hover {
+  background: alpha(@foreground, 0.07);
+}
+
+#memory.c {
+  color: @rose;
+}
+
+/* ===== CENTER: Clock ===== */
+#clock {
+  color: @gold;
+}
+
+#clock:hover {
+  background: alpha(@foreground, 0.07);
+}
+
+/* ===== RIGHT: Network ===== */
+#network {
+  color: @blue;
+  font-size: 16px;
+}
+
+#network:hover {
+  background: alpha(@foreground, 0.07);
+}
+
+#network.disconnected {
+  color: alpha(@foreground, 0.55);
+}
+
+/* ===== RIGHT: Tray ===== */
+#tray {
+  padding: 0 6px;
+}
+
+#tray menu {
+  background: @background;
+  border: 1px solid alpha(@foreground, 0.1);
+  border-radius: 12px;
+}
+
+#tray menu menuitem {
+  border-radius: 8px;
+  padding: 4px 8px;
+}
+
+#tray menu menuitem:hover {
+  background: alpha(@foreground, 0.07);
+}
+
+/* ===== RIGHT: Privacy ===== */
+#privacy {
+  background: alpha(@green, 0.15);
+  border-radius: 8px;
+  padding: 0 6px;
+  color: @green;
+}
+
+/* ===== RIGHT: Language ===== */
+#language {
+  color: @mauve;
+  font-size: 16px;
+}
+
+#language:hover {
+  background: alpha(@foreground, 0.07);
+}
+
+/* ===== RIGHT: Audio ===== */
+#pulseaudio {
+  color: @peach;
+  font-size: 16px;
+}
+
+#pulseaudio:hover {
+  background: alpha(@foreground, 0.07);
+}
+
+#pulseaudio.muted {
+  color: alpha(@foreground, 0.55);
+}
+
+/* ===== RIGHT: Backlight ===== */
+#custom-backlight {
+  color: @gold;
+  font-size: 16px;
+}
+
+#custom-backlight:hover {
+  background: alpha(@foreground, 0.07);
+}
+
+/* ===== RIGHT: Power Profile ===== */
+#power-profiles-daemon {
+  color: @foreground;
+  font-size: 16px;
+  padding-right: 6px;
+}
+
+#power-profiles-daemon:hover {
+  background: alpha(@foreground, 0.07);
+}
+
+/* ===== RIGHT: Battery ===== */
+#battery {
+  color: @green;
+  font-size: 16px;
+}
+
+#battery:hover {
+  background: alpha(@foreground, 0.07);
+}
+
+#battery.warning {
+  color: @gold;
+}
+
+#battery.critical {
+  color: @rose;
+  animation: blink 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes blink {
+  from { opacity: 1; }
+  to   { opacity: 0.5; }
+}
+
+/* ===== RIGHT: Power Button ===== */
+#custom-power {
+  color: @rose;
+  padding: 0 6px;
+  margin-right: 2px;
+  font-size: 17px;
+}
+
+#custom-power:hover {
+  background: alpha(@rose, 0.15);
+  border-radius: 10px;
+}
