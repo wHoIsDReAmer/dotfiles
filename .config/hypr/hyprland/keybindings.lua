@@ -147,20 +147,46 @@ hl.bind("XF86MonBrightnessUp",   hl.dsp.exec_cmd("~/.config/bin/brightness-contr
 -- it from the layout and dumps every window onto a fallback output.
 local monitors = require("hyprland/monitors")
 
-hl.bind("switch:on:Lid Switch", function()
+-- Switch binds only fire on lid *transitions*. Closing the lid with no external
+-- monitor is a no-op (guard above), and plugging one in afterwards raises no
+-- lid event, so the panel stayed on. Read the kernel's lid state directly and
+-- re-evaluate on hotplug and on config (re)load.
+local function lid_closed()
+    local f = io.open("/proc/acpi/button/lid/LID/state")
+    if not f then return false end
+    local state = f:read("*a")
+    f:close()
+    return state:find("closed", 1, true) ~= nil
+end
+
+local function external_monitor_active()
     for _, m in ipairs(hl.get_monitors()) do
-        if m.name ~= "eDP-1" then
-            hl.monitor({ output = "eDP-1", disabled = true })
-            return
-        end
+        if m.name ~= "eDP-1" then return true end
     end
-end, { locked = true })
+    return false
+end
+
+local function drop_panel_if_clamshell()
+    if lid_closed() and external_monitor_active() then
+        hl.monitor({ output = "eDP-1", disabled = true })
+    end
+end
+
+hl.bind("switch:on:Lid Switch", drop_panel_if_clamshell, { locked = true })
 
 -- Re-apply just the eDP-1 rule instead of a full `hyprctl reload`, so the
 -- external monitor and workspace layout stay untouched (no flicker/jumps).
 hl.bind("switch:off:Lid Switch", function()
     hl.monitor(monitors.edp_rule)
 end, { locked = true })
+
+-- Monitor plugged in (or present at startup) while the lid is already closed.
+-- hl.monitor() only schedules a refresh, so calling it from here is safe.
+hl.on("monitor.added", drop_panel_if_clamshell)
+
+-- `hyprctl reload` re-registers monitors.edp_rule (enabled); undo that if we
+-- are reloading in clamshell. No-op at first start: no monitors exist yet.
+drop_panel_if_clamshell()
 
 -- Requires playerctl
 hl.bind("XF86AudioNext",  hl.dsp.exec_cmd("playerctl next"),       { locked = true })
